@@ -4,12 +4,15 @@ function paginate(currentPage, perPage, target) {
   var total = target.length;
   var totalPages = total/perPage;
   var ceiling = currentPage * perPage;
-  var paginationElement = target.parent().prepend("<div class='pagination'></div>");
-  
-  jQuery(".pagination").html("");
+  jQuery(".pagination").remove();
+  var paginationElement = target.parent().append("<div class='pagination'></div>");
   
   for(i=0; i<totalPages; i++) {
-     paginationElement.append("<a onclick='javascript: goToPage(" + (i+1) + ")'>" + (i+1) + "</a>");
+     if(currentPage === i+1) {
+        jQuery(".pagination").append("<a style='text-none' onclick='javascript: goToPage(" + (i+1) + ")'>" + (i+1) + "</a>"); 
+     } else {
+        jQuery(".pagination").append("<a style='text-decoration:underline' onclick='javascript: goToPage(" + (i+1) + ")'>" + (i+1) + "</a>");
+     }
   }
   
   target.each(function(i,element){
