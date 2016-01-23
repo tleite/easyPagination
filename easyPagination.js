@@ -24,9 +24,7 @@ function paginate(currentPage, perPage, target) {
   })
 }
 
-function goToPage(page) {
-  var target = jQuery(".messages ul ul li");
+function goToPage(elementTarget, page) {
+  var target = jQuery(elementTarget);
   paginate(page, 3, target);
 }
-
-goToPage(1);
