@@ -1,19 +1,27 @@
-function paginate(currentPage, perPage, target) { 
-  var currentPage = currentPage;
-  var perPage = perPage;  
-  var total = target.length;
-  var totalPages = total/perPage;
-  var ceiling = currentPage * perPage;
-  var paginationElement = target.parent().prepend("<div class='pagination'></div>");
+function paginate(currentPage) { 
   
-  jQuery(".pagination").html("");
-  
-  for(i=0; i<totalPages; i++) {
-     paginationElement.append("<a onclick='javascript: goToPage(" + (i+1) + ")'>" + (i+1) + "</a>");
+  var userVariables = {
+    target: jQuery(".listClassName"),
+    perPage: 10
   }
   
-  target.each(function(i,element){
-    if(i+1 <= ceiling && i+1 > ceiling-perPage) {
+  var currentPage = currentPage;  
+  var total = userVariables.target.length;
+  var totalPages = total/userVariables.perPage;
+  var ceiling = currentPage * userVariables.perPage;
+  jQuery(".pagination").remove();
+  var paginationElement = userVariables.target.parent().append("<div class='pagination'></div>");
+  
+  for(i=0; i<totalPages; i++) {
+     if(currentPage === i+1) {
+        jQuery(".pagination").append("<a style='text-none; cursor: pointer' onclick='javascript: goToPage(" + (i+1) + ")'>" + (i+1) + "</a>"); 
+     } else {
+        jQuery(".pagination").append("<a style='text-decoration:underline; cursor: pointer' onclick='javascript: goToPage(" + (i+1) + ")'>" + (i+1) + "</a>");
+     }
+  }
+  
+  userVariables.target.each(function(i,element){
+    if(i+1 <= ceiling && i+1 > ceiling-userVariables.perPage) {
         jQuery(element).show();
     } else {
         jQuery(element).hide();
@@ -21,9 +29,9 @@ function paginate(currentPage, perPage, target) {
   })
 }
 
-function goToPage(page) {
-  var target = jQuery(".messages ul ul li");
-  paginate(page, 3, target);
+function goToPage(page) {    
+  paginate(page);
 }
+
 
 goToPage(1);
