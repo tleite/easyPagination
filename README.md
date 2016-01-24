@@ -1,3 +1,5 @@
-This doesnt work yet... the goal of this project is to have a NO BS easy way to create pagination on HTML lists.
+Step 1 - Add Jquery to you page (I want to remove this dependency in the future)
 
-I just spent 30 minutes writing this, it's a work in progress
+Step 2 - Add easyPagination.js
+
+Step 3 - run **goToPage(elementTarget, 1)**
